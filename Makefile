@@ -1,5 +1,5 @@
-NAME	=	fractol
-SRCS	=	./src/main.c ./src/param_utils.c
+NAME	=	sloT
+SRCS	=	./src/main.c ./src/param_utils.c ./src/utils.c
 OBJS	=	$(SRCS:.c=.o)
 CC		=	cc
 MLXDIR	= ./minilibx-linux
