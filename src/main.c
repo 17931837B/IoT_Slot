@@ -5,11 +5,28 @@ long long current_time;
 long long last_time;
 long long count_time = 0;
 
-void	plot_reel(t_param *param, int x, int y)
+void	plot_reel(t_param *param)
 {
-	if (120 <= x && x < 130 && count_time % HEIGHT <= y && y < count_time % HEIGHT + 10)
-		paint_color(&param->img, x, y, rgb_num(0, 0, 0));
-	// printf("%lld\n", count_time % HEIGHT);
+	int	i;
+	int	j;
+	int	o_x = HOUSING;
+	int	o_y = count_time;
+
+	i = 0;
+	while (i < REEL_SIZE)
+	{
+		j = 0;
+		while (j < REEL_SIZE)
+		{
+			// printf("%d\n", (o_y + i) % (HEIGHT - 2 * HOUSING) + HOUSING);
+			if (reel[i][j] == 2)
+				paint_color(&param->img, o_x + j, (o_y + i) % (HEIGHT - 2 * HOUSING) + HOUSING, rgb_num(255, 0, 0));
+			else if (reel[i][j] == 1)
+				paint_color(&param->img, o_x + j, (o_y + i) % (HEIGHT - 2 * HOUSING) + HOUSING, rgb_num(0, 0, 0));
+			j++;
+		}
+		i++;
+	}
 }
 
 static int	main_loop(t_param *param)
@@ -31,16 +48,18 @@ static int	main_loop(t_param *param)
 					paint_color(&param->img, x, y, rgb_num(255, 0, 0));
 				else if (!((WIDTH - 2 * (HOUSING + LINE)) / 3 + HOUSING <= x && x < (WIDTH - 2 * (HOUSING + LINE)) / 3 + HOUSING + LINE) && !((WIDTH - 2 * (HOUSING + LINE)) * 2 / 3 + HOUSING + LINE <= x && x < (WIDTH - 2 * (HOUSING + LINE)) * 2 / 3 + HOUSING + 2 * LINE))
 					paint_color(&param->img, x, y, rgb_num(255, 255, 255));
-				plot_reel(param, x, y);
+				if (120 <= x && x < 130 && count_time % HEIGHT <= y && y < count_time % HEIGHT + 10)
+					paint_color(&param->img, x, y, rgb_num(0, 0, 0));
 				x++;
 			}
 			y++;
 		}
+		plot_reel(param);
 		mlx_put_image_to_window(param->mlx, param->win, param->img.img, 0, 0);
 		count_time++;
 		last_time = current_time;
 	}
-	// printf("%lld\n", count_time % HEIGHT);
+	printf("%lld\n", count_time % HEIGHT);
 	return (0);
 }
 

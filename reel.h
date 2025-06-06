@@ -1,7 +1,8 @@
 #ifndef REEL_H
 # define REEL_H
 
-int test = 42;
+# define REEL_SIZE 16
+
 const int reel[16][17] ={
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7},

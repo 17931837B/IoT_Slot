@@ -13,8 +13,10 @@
 # define HOUSING 30
 # define LINE 5
 # define SIZE 10
-# define FPS 2000.0
+# define FPS 20.0
 # define ONE_SECONDS 1000000000LL
+# define REEL_W (WIDTH - 2 * (HOUSING + LINE))
+# define PLOT_W (REEL_W / 16)
 
 typedef struct s_img
 {
