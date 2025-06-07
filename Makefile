@@ -21,6 +21,9 @@ fclean:		clean
 git:
 			git clone git@github.com:42Paris/minilibx-linux.git minilibx-linux
 
+rm:
+			rm -rf minilibx-linux
+
 re:			fclean all
 
 .PHONY:		all clean fclean re

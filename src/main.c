@@ -10,30 +10,33 @@ void	plot_reel(t_param *param)
 	int	i;
 	int	j;
 	int	k, l;
-	int	o_x = HOUSING;
-	int	o_y = count_time;
+	int	o_x = HOUSING + 10;
+	int	o_y = HOUSING;
+	// int	o_y = count_time;
 
 	i = 0;
-	while (i < REEL_Y)
+	while (i < H_REEL / MAG_RATE)
 	{
 		j = 0;
 		while (j < REEL_X)
 		{
-			k = 1;
-			while (k < MAG_RATE + 1)
+			l = 0;
+			while (l < MAG_RATE)
 			{
-				l = 1;
-				while (l < MAG_RATE + 1)
+				k = 0;
+				while (k < REEL_X)
 				{
-					if (reel[i][j] == 2)
-						paint_color(&param->img, o_x + j * MAG_RATE + l + 25, (o_y + i * MAG_RATE + k) % (HEIGHT - 2 * HOUSING) + HOUSING, rgb_num(255, 0, 0));
-					else if (reel[i][j] == 1)
-						paint_color(&param->img, o_x + j * MAG_RATE + l + 25, (o_y + i * MAG_RATE + k) % (HEIGHT - 2 * HOUSING) + HOUSING, rgb_num(0, 0, 0));
-					else if (reel[i][j] == 3)
-						paint_color(&param->img, o_x + j * MAG_RATE + l + 25, (o_y + i * MAG_RATE + k) % (HEIGHT - 2 * HOUSING) + HOUSING, rgb_num(255, 255, 0));
-					l++;
+					if (reel[(i - (count_time % REEL_Y) + REEL_Y) % REEL_Y][j] == 2)
+						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 0, 0));
+					else if (reel[(i - (count_time % REEL_Y) + REEL_Y) % REEL_Y][j] == 1)
+						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 0, 0));
+					else if (reel[(i - (count_time % REEL_Y) + REEL_Y) % REEL_Y][j] == 3)
+						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 255, 0));
+					else if (reel[(i - (count_time % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
+						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 255, 0));
+					k++;
 				}
-				k++;
+				l++;
 			}
 			j++;
 		}
@@ -59,13 +62,11 @@ static int	main_loop(t_param *param)
 					paint_color(&param->img, x, y, rgb_num(255, 0, 0));
 				else if (!((WIDTH - 2 * (HOUSING + LINE)) / 3 + HOUSING <= x && x < (WIDTH - 2 * (HOUSING + LINE)) / 3 + HOUSING + LINE) && !((WIDTH - 2 * (HOUSING + LINE)) * 2 / 3 + HOUSING + LINE <= x && x < (WIDTH - 2 * (HOUSING + LINE)) * 2 / 3 + HOUSING + 2 * LINE))
 					paint_color(&param->img, x, y, rgb_num(255, 255, 255));
-				// if (120 <= x && x < 130 && count_time % HEIGHT <= y && y < count_time % HEIGHT + 10)
-				// 	paint_color(&param->img, x, y, rgb_num(0, 0, 0));
 				x++;
 			}
 			y++;
 		}
-		plot_reel(param);
+		plot_reel1(param);
 		mlx_put_image_to_window(param->mlx, param->win, param->img.img, 0, 0);
 		count_time++;
 		last_time = current_time;
