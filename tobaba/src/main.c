@@ -38,6 +38,15 @@ int	plot_reel1(t_param *param)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 255, 0));
 					else if (reel[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 255, 0));
+					else if (param->role[0] == param->role[1] && param->role[1] == param->role[2] && param->role[0] != 0 && count_time % 20 >= 10)
+					{
+						if (count_time % 30 >= 20)
+							paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(180, 240, 0));
+						else if (count_time % 30 >= 10)
+							paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(180, 240, 0));
+						else
+							paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 0, 255));
+					}
 					k++;
 				}
 				l++;
@@ -82,6 +91,15 @@ int	plot_reel2(t_param *param)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 255, 0));
 					else if (reel[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 255, 0));
+					else if (param->role[0] == param->role[1] && param->role[1] == param->role[2] && param->role[0] != 0 && count_time % 20 >= 10)
+					{
+						if (count_time % 30 >= 20)
+							paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(180, 240, 0));
+						else if (count_time % 30 >= 10)
+							paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 0, 255));
+						else
+							paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(180, 240, 0));
+					}
 					k++;
 				}
 				l++;
@@ -126,6 +144,15 @@ int	plot_reel3(t_param *param)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 255, 0));
 					else if (reel[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 255, 0));
+					else if (param->role[0] == param->role[1] && param->role[1] == param->role[2] && param->role[0] != 0 && count_time % 20 >= 10)
+					{
+						if (count_time % 30 >= 20)
+							paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 0, 255));
+						else if (count_time % 30 >= 10)
+							paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(180, 240, 0));
+						else
+							paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(180, 240, 0));
+					}
 					k++;
 				}
 				l++;
@@ -165,10 +192,10 @@ static int	main_loop(t_param *param)
 			}
 			y++;
 		}
-		role[0] = plot_reel1(param);
-		role[1] = plot_reel2(param);
-		role[2] = plot_reel3(param);
-		printf("%d, %d, %d\n", role[0], role[1], role[2]);
+		param->role[0] = plot_reel1(param);
+		param->role[1] = plot_reel2(param);
+		param->role[2] = plot_reel3(param);
+		// printf("%d, %d, %d\n", role[0], role[1], role[2]);
 		mlx_put_image_to_window(param->mlx, param->win, param->img.img, 0, 0);
 		count_time++;
 		last_time = current_time;

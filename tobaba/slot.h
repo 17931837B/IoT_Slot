@@ -40,6 +40,7 @@ typedef struct s_param
 	bool				is_up_left;
 	bool				is_up_right;
 	bool				is_up_senter;
+	int					role[3];
 } t_param;
 
 int		exit_param(t_param *param);
