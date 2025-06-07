@@ -1,5 +1,5 @@
 NAME	=	sloT
-SRCS	=	./src/main.c ./src/param_utils.c ./src/utils.c
+SRCS	=	./src/main.c ./src/param_utils.c ./src/utils.c ./src/mlx_hook.c
 OBJS	=	$(SRCS:.c=.o)
 CC		=	cc
 MLXDIR	= ./minilibx-linux

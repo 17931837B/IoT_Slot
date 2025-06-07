@@ -16,4 +16,7 @@ void	create_param(t_param *param)
 	param->img.addr = mlx_get_data_addr(param->img.img,
 			&param->img.bits_per_pixel,
 			&param->img.size_line, &param->img.endian);
+	param->is_up_left = true;
+	param->is_up_right = true;
+	param->is_up_senter = true;
 }
