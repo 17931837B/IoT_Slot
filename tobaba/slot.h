@@ -14,7 +14,7 @@
 # define HOUSING 30
 # define LINE 5
 # define SIZE 10
-# define FPS 320.0
+# define FPS 160.0
 # define ONE_SECONDS 1000000000LL
 # define W_REEL (WIDTH - 2 * (HOUSING + LINE))
 # define H_REEL (HEIGHT - 2 * HOUSING)
@@ -40,6 +40,7 @@ typedef struct s_param
 	bool				is_up_left;
 	bool				is_up_right;
 	bool				is_up_senter;
+	int					role[3];
 } t_param;
 
 int		exit_param(t_param *param);

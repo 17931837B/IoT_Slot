@@ -25,7 +25,11 @@ int	key_press_hook(int keycode, t_param *param)
 		else
 			param->is_up_senter = true;
 	}
-	// if (keycode == 65364) //down
-	// 	printf("3\n");
+	if (keycode == 65364) //down
+	{
+		param->is_up_right = true;
+		param->is_up_left = true;
+		param->is_up_senter = true;
+	}
 	return (0);
 }
