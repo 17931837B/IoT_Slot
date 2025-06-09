@@ -8,7 +8,7 @@ int	now_pos_l = 0;
 int	now_pos_r = 0;
 int	now_pos_s = 0;
 
-int	plot_reel1(t_param *param)
+int	plot_reel1(t_param *param) //left reel
 {
 	int	i;
 	int	j;
@@ -61,7 +61,7 @@ int	plot_reel1(t_param *param)
 		return (reel[(H_REEL / MAG_RATE / 2 - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][16]);
 }
 
-int	plot_reel2(t_param *param)
+int	plot_reel2(t_param *param) //senter reel
 {
 	int	i;
 	int	j;
@@ -114,7 +114,7 @@ int	plot_reel2(t_param *param)
 		return (reel[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16]);
 }
 
-int	plot_reel3(t_param *param)
+int	plot_reel3(t_param *param) //right reel
 {
 	int	i;
 	int	j;
