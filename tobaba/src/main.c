@@ -4,6 +4,7 @@
 long long current_time;
 long long last_time;
 long long count_time = 0;
+int noize_time = 0;
 int	now_pos_l = 0;
 int	now_pos_r = 0;
 int	now_pos_s = 0;
@@ -16,7 +17,7 @@ int	plot_reel1(t_param *param) //left reel
 	int	o_x = HOUSING + 15;
 	int	o_y = HOUSING;
 
-	if (param->is_up_left || !reel[(H_REEL / MAG_RATE / 2 - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][16])
+	if (param->is_up_left || !reel_l[(H_REEL / MAG_RATE / 2 - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][16])
 		now_pos_l = count_time;
 	i = 0;
 	while (i < H_REEL / MAG_RATE)
@@ -30,14 +31,16 @@ int	plot_reel1(t_param *param) //left reel
 				k = 0;
 				while (k < REEL_X)
 				{
-					if (reel[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 2)
+					if (reel_l[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 2)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 0, 0));
-					else if (reel[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 1)
+					else if (reel_l[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 1)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 0, 0));
-					else if (reel[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 3)
+					else if (reel_l[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 3)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 255, 0));
-					else if (reel[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
+					else if (reel_l[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 255, 0));
+					else if (reel_l[(i - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][j] == 5)
+						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(250, 0, 250));
 					else if (param->role[0] == param->role[1] && param->role[1] == param->role[2] && param->role[0] != 0 && count_time % 20 >= 10)
 					{
 						if (count_time % 30 >= 20)
@@ -58,7 +61,7 @@ int	plot_reel1(t_param *param) //left reel
 	if (param->is_up_left)
 		return (0);
 	else
-		return (reel[(H_REEL / MAG_RATE / 2 - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][16]);
+		return (reel_l[(H_REEL / MAG_RATE / 2 - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][16]);
 }
 
 int	plot_reel2(t_param *param) //senter reel
@@ -69,7 +72,7 @@ int	plot_reel2(t_param *param) //senter reel
 	int	o_x = 360;
 	int	o_y = HOUSING;
 
-	if (param->is_up_senter || !reel[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16])
+	if (param->is_up_senter || !reel_s[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16])
 		now_pos_s = count_time + 10;
 	i = 0;
 	while (i < H_REEL / MAG_RATE)
@@ -83,14 +86,16 @@ int	plot_reel2(t_param *param) //senter reel
 				k = 0;
 				while (k < REEL_X)
 				{
-					if (reel[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 2)
+					if (reel_s[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 2)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 0, 0));
-					else if (reel[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 1)
+					else if (reel_s[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 1)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 0, 0));
-					else if (reel[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 3)
+					else if (reel_s[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 3)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 255, 0));
-					else if (reel[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
+					else if (reel_s[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 255, 0));
+					else if (reel_s[(i - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][j] == 5)
+						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(250, 0, 250));
 					else if (param->role[0] == param->role[1] && param->role[1] == param->role[2] && param->role[0] != 0 && count_time % 20 >= 10)
 					{
 						if (count_time % 30 >= 20)
@@ -111,7 +116,7 @@ int	plot_reel2(t_param *param) //senter reel
 	if (param->is_up_senter)
 		return (0);
 	else
-		return (reel[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16]);
+		return (reel_s[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16]);
 }
 
 int	plot_reel3(t_param *param) //right reel
@@ -122,7 +127,7 @@ int	plot_reel3(t_param *param) //right reel
 	int	o_x = 660;
 	int	o_y = HOUSING;
 
-	if (param->is_up_right || !reel[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16])
+	if (param->is_up_right || !reel_r[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16])
 		now_pos_r = count_time + 20;
 	i = 0;
 	while (i < H_REEL / MAG_RATE)
@@ -136,14 +141,16 @@ int	plot_reel3(t_param *param) //right reel
 				k = 0;
 				while (k < REEL_X)
 				{
-					if (reel[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 2)
+					if (reel_r[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 2)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 0, 0));
-					else if (reel[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 1)
+					else if (reel_r[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 1)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 0, 0));
-					else if (reel[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 3)
+					else if (reel_r[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 3)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(255, 255, 0));
-					else if (reel[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
+					else if (reel_r[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 4)
 						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(0, 255, 0));
+					else if (reel_r[(i - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][j] == 5)
+						paint_color(&param->img, o_x + j * MAG_RATE + k, o_y + i * MAG_RATE + l, rgb_num(250, 0, 250));
 					else if (param->role[0] == param->role[1] && param->role[1] == param->role[2] && param->role[0] != 0 && count_time % 20 >= 10)
 					{
 						if (count_time % 30 >= 20)
@@ -164,7 +171,31 @@ int	plot_reel3(t_param *param) //right reel
 	if (param->is_up_right)
 		return (0);
 	else
-		return (reel[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16]);
+		return (reel_r[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16]);
+}
+
+int	plot_noize(t_param *param) //noize
+{
+	int	i;
+	int	j;
+	int	k, l;
+	int is_brack;
+
+	i = HOUSING;
+	while (i < HEIGHT - HOUSING)
+	{
+		j = HOUSING;
+		is_brack = rand() % 5;
+		if (!is_brack)
+		{
+			while (j < WIDTH - HOUSING)
+			{
+				paint_color(&param->img, j, i, rgb_num(0, 0, 0));
+				j++;
+			}
+		}
+		i++;
+	}
 }
 
 static int	main_loop(t_param *param)
@@ -195,7 +226,9 @@ static int	main_loop(t_param *param)
 		param->role[0] = plot_reel1(param);
 		param->role[1] = plot_reel2(param);
 		param->role[2] = plot_reel3(param);
-		// printf("%d, %d, %d\n", role[0], role[1], role[2]);
+		printf("%d, %d, %d\n",param->role[0], param->role[1], param->role[2]);
+		if ((param->role[0] == param->role[1] && !param->role[2] && param->role[0]))
+			plot_noize(param);
 		mlx_put_image_to_window(param->mlx, param->win, param->img.img, 0, 0);
 		count_time++;
 		last_time = current_time;
@@ -207,6 +240,7 @@ int main(void)
 {
 	t_param	param;
 
+	srand(time(NULL));
 	create_param(&param);
 	mlx_hook(param.win, KeyPress, KeyPressMask, key_press_hook, &param);
 	mlx_hook(param.win, ClientMessage, StructureNotifyMask, exit_param, &param);
