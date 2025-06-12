@@ -12,5 +12,3 @@ make
 ```
 ./sloT
 ```
-
-test
