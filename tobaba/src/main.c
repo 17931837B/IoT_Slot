@@ -17,8 +17,7 @@ int	plot_reel1(t_param *param) //left reel
 	int	o_x = HOUSING + 15;
 	int	o_y = HOUSING;
 
-	// if (param->is_up_left || !reel_l[(H_REEL / MAG_RATE / 2 - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][16])
-	if (param->is_up_left || reel_l[(H_REEL / MAG_RATE / 2 - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][16] != 7)
+	if (param->is_up_left || !reel_l[(H_REEL / MAG_RATE / 2 - (now_pos_l % REEL_Y) + REEL_Y) % REEL_Y][16])
 		now_pos_l = count_time;
 	i = 0;
 	while (i < H_REEL / MAG_RATE)
@@ -73,8 +72,7 @@ int	plot_reel2(t_param *param) //senter reel
 	int	o_x = 360;
 	int	o_y = HOUSING;
 
-	// if (param->is_up_senter || !reel_s[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16])
-	if (param->is_up_senter || reel_s[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16] != 7)
+	if (param->is_up_senter || !reel_s[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16])
 		now_pos_s = count_time + 10;
 	i = 0;
 	while (i < H_REEL / MAG_RATE)
@@ -129,7 +127,7 @@ int	plot_reel3(t_param *param) //right reel
 	int	o_x = 660;
 	int	o_y = HOUSING;
 
-	if (param->is_up_right || reel_r[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16] != 7)
+	if (param->is_up_right || !reel_r[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16])
 		now_pos_r = count_time + 20;
 	i = 0;
 	while (i < H_REEL / MAG_RATE)
