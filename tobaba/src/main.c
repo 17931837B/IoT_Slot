@@ -8,6 +8,7 @@ int noize_time = 0;
 int	now_pos_l = 0;
 int	now_pos_r = 0;
 int	now_pos_s = 0;
+bool	chance = false;
 
 int	plot_reel1(t_param *param) //left reel
 {
@@ -127,8 +128,19 @@ int	plot_reel3(t_param *param) //right reel
 	int	o_x = 660;
 	int	o_y = HOUSING;
 
-	if (param->is_up_right || !reel_r[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16])
+	if (chance)
+	{
+		printf("chance!\n");
+		if (param->is_up_right || (reel_r[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16] != reel_s[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16]))
+		{
+			now_pos_r = count_time + 20;
+		}
+			// now_pos_r = count_time + 20;
+	}
+	else if (param->is_up_right || !reel_r[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16])
 		now_pos_r = count_time + 20;
+	printf("%d : %d\n", reel_r[(H_REEL / MAG_RATE / 2 - (now_pos_r % REEL_Y) + REEL_Y) % REEL_Y][16], reel_s[(H_REEL / MAG_RATE / 2 - (now_pos_s % REEL_Y) + REEL_Y) % REEL_Y][16]);
+		// now_pos_r = count_time + 20;
 	i = 0;
 	while (i < H_REEL / MAG_RATE)
 	{
@@ -228,7 +240,12 @@ static int	main_loop(t_param *param)
 		param->role[2] = plot_reel3(param);
 		printf("%d, %d, %d\n",param->role[0], param->role[1], param->role[2]);
 		if ((param->role[0] == param->role[1] && !param->role[2] && param->role[0]))
+		{
+			chance = true;
 			plot_noize(param);
+		}
+		else if (!param->role[0] || !param->role[1])
+			chance = false;
 		mlx_put_image_to_window(param->mlx, param->win, param->img.img, 0, 0);
 		count_time++;
 		last_time = current_time;
