@@ -120,6 +120,30 @@ main(void)
         // control sw
         sw = *(uint32_t *)h2p_lw_sw_addr;
         
+        if (sw & 0x01) { // SW0の状態 (ビット0)
+            printf("  SW0: ON\n");
+        } else {
+            printf("  SW0: OFF\n");
+        }
+
+        if (sw & 0x02) { // SW1の状態 (ビット1)
+            printf("  SW1: ON\n");
+        } else {
+            printf("  SW1: OFF\n");
+        }
+        
+        if (sw & 0x04) { // SW2の状態 (ビット2)
+            printf("  SW2: ON\n");
+        } else {
+            printf("  SW2: OFF\n");
+        }
+
+        if (sw & 0x08) { // SW3の状態 (ビット3)
+            printf("  SW3: ON\n");
+        } else {
+            printf("  SW3: OFF\n");
+        }
+        printf("----------------------------------------\n");
         led_mask = 0x18;
         for (i = 0; i < result/sizeof(struct input_event); i++) {
 
