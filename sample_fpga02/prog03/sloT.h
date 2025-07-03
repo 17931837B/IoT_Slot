@@ -1,10 +1,10 @@
-#ifndef SLOT_H
-# define SLOT_H
+// #ifndef SLOT_H
+// # define SLOT_H
 
-#include <stdbool.h>
+// #include <stdbool.h>
 
-bool slide[4];
+// bool slide[4];
 
-int main_sub();
+// void    *main_sub();
 
-#endif
+// #endif

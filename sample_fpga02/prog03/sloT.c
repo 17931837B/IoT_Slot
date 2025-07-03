@@ -7,6 +7,9 @@
 #include <fcntl.h>
 #include <string.h>
 #include "sloT.h"
+#include <unistd.h>
+#include <stdbool.h>
+#include <pthread.h>
 
 #define SYMBOL_TYPES 4
 #define ROWS 3 // odd num
@@ -85,7 +88,7 @@ void update_symbols(SloTColumn* col) {
 void update_offset(SloTColumn* col, int i) {
     col->offset--;
     if (col->offset <= 0) {
-        if (col->stop_requested || slide[i]) {
+        if (col->stop_requested) {
             col->is_stopped = true;
             col->stop_requested = false;
         } else {
@@ -124,19 +127,24 @@ void generate_bitmap() {
 }
 
 void render_to_terminal() {
-    printf("\033[2J\033[H"); // clear
-    for (int i = 0; i < display_height; ++i) {
-        for (int j = 0; j < display_width; j++) 
-            printf(bitmap[i][j] ? "#" : " ");
-        printf("\n");
-    }
+    // printf("\033[2J\033[H"); // clear
+    // for (int i = 0; i < display_height; ++i) {
+    //     for (int j = 0; j < display_width; j++) 
+    //         printf(bitmap[i][j] ? "#" : " ");
+    //     printf("\n");
+    // }
 }
 
 void handle_input() {
     char ch;
     while (read(0, &ch, 1) > 0) {
         for (int i = 0; i < COLS; i++) 
-            if (ch == KEYS_MID[i]) sloT[i].stop_requested = true;
+            // if (ch == KEYS_MID[i])
+            if (slide[i])
+            {
+                printf("%d, %d, %d, %d\n",slide[0], slide[1], slide[2], slide[3]);
+                sloT[i].stop_requested = true;
+            }
         if (ch == KEYS_MID[COLS]) reset_sloT();
     }
 }
@@ -152,7 +160,12 @@ bool check_result() {
     return true;
 }
 
-int main_sub() {
+void    *main_sub() {
+    // while(1)
+    // {
+    //     printf("%d, %d, %d, %d\n", slide[0], slide[1], slide[2], slide[3]);
+    //     printf("--------------\n");
+    // }
     srand(time(NULL));
     enable_raw_mode();
     reset_sloT();
@@ -180,5 +193,5 @@ int main_sub() {
 
         usleep(1 *1000); // ms
     }
-    return 0;
+    return (NULL);
 }
